@@ -24,11 +24,11 @@ class Game {
     }
 
     loop(delta) {
-        this.loopCount = (this.loopCount || 0) + 1;
-        console.log(`Loop: ${this.loopCount}`);
+        Game.delta = delta;
+        Game.loopCount = Game.loopCount + 1;
+        console.log(`Loop: ${Game.loopCount}`);
 
-        this.update(delta);
-
+        this.update();
         this.draw();
 
         // loop with fixed timestep
@@ -55,3 +55,5 @@ class Game {
 }
 
 Game.timestep = 30 / 1000;
+Game.delta = 0;
+Game.loopCount = 0;

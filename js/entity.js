@@ -3,7 +3,7 @@ class Entity {
         this.position = position;
     }
 
-    update(delta) {}
+    update() {}
 
     draw(ctx) {}
 }
