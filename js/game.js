@@ -9,7 +9,7 @@ class Game {
             new Tank(100, 50, Math.PI / 2)
         ];
 
-        this.loop(1000);
+        this.loop(Game.timestep);
     }
 
     initialise() {
@@ -30,7 +30,7 @@ class Game {
 
         // loop with fixed timestep
         // the game will slow down as updates take longer (the space invaders effect)
-        setTimeout(() => this.loop(Game.timestep), Game.timestep);
+        setTimeout(() => this.loop(Game.timestep), Game.timestep * 1000);
     }
 
     update(delta) {
@@ -55,8 +55,9 @@ class Game {
         // draw all entities
         for (let entity of this.entities) {
             entity.draw(ctx);
+            ctx.resetTransform();
         }
     }
 }
 
-Game.timestep = 30; //ms
+Game.timestep = 30 / 1000;
