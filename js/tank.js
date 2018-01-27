@@ -1,9 +1,15 @@
-class Tank {
+class Tank extends Entity {
     constructor(x, y, direction) {
+        super();
+
         this.x = x;
         this.y = y;
-        this.direction = direction; //Math.PI;
+        this.direction = direction;
         this.turretDirection = 0;
+    }
+
+    update(delta) {
+        //
     }
 
     draw(ctx) {

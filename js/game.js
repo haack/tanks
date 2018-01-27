@@ -4,10 +4,12 @@ class Game {
 
         this.initialise();
 
-        this.player = new Tank(50, 50, 0);
-        this.player2 = new Tank(100, 50, Math.PI / 2);
+        this.entities = [
+            new Tank(50, 50, 0),
+            new Tank(100, 50, Math.PI / 2)
+        ];
 
-        this.loop();
+        this.loop(1000);
     }
 
     initialise() {
@@ -22,9 +24,20 @@ class Game {
         this.loopCount = (this.loopCount || 0) + 1;
         console.log(`Loop: ${this.loopCount}`);
 
+        this.update(delta);
+
         this.draw();
 
-        setTimeout(() => this.loop(), 1000);
+        // loop with fixed timestep
+        // the game will slow down as updates take longer (the space invaders effect)
+        setTimeout(() => this.loop(Game.timestep), Game.timestep);
+    }
+
+    update(delta) {
+        // update all entities
+        for (let entity of this.entities) {
+            entity.update(delta);
+        }
     }
 
     draw() {
@@ -39,7 +52,11 @@ class Game {
         ctx.fill();
         ctx.closePath();
 
-        this.player.draw(ctx);
-        this.player2.draw(ctx);
+        // draw all entities
+        for (let entity of this.entities) {
+            entity.draw(ctx);
+        }
     }
 }
+
+Game.timestep = 30; //ms
