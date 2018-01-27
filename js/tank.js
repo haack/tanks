@@ -4,13 +4,14 @@ class Tank extends Entity {
 
         this.direction = direction;
         this.turretDirection = 0;
+
+        this.bullets = [];
     }
 
-    update(delta) {
-        this.rotate(Tank.rotationSpeed * delta * (Math.PI /180));
-        this.rotateTurret(Tank.turretRotationSpeed * delta * (Math.PI /180));
+    update() {
+        this.navigateTo(new Waypoint(200, 200));
 
-        this.drive(delta);
+        this.drive(1);
     }
 
     draw(ctx) {
@@ -21,10 +22,24 @@ class Tank extends Entity {
         this.drawTurret(ctx);
     }
 
-    drive(delta) {
-        //move in direction
-        let dx = Math.sin(this.direction) * Tank.driveSpeed * delta;
-        let dy = -1 * Math.cos(this.direction) * Tank.driveSpeed * delta;
+    navigateTo(target) {
+        if (!this.at(target)) {
+            // get bearing to target
+            let bearingToTarget = this.position.getBearingTo(target);
+
+            console.log(bearingToTarget);
+            // turn to bearing
+            this.rotate(1);
+        } else {
+            console.log("Target reached...");
+        }
+    }
+
+    drive(power) {
+        power = Math.clamp(power, -1, 1);
+
+        let dx = power * Math.sin(this.direction) * Tank.driveSpeed * Game.delta;
+        let dy = -1 * power * Math.cos(this.direction) * Tank.driveSpeed * Game.delta;
 
         this.position.x += dx;
         this.position.y += dy;
@@ -36,12 +51,14 @@ class Tank extends Entity {
         }
     }
 
-    rotate(rad) {
-        this.direction += rad;
+    rotate(power) {
+        power = Math.clamp(power, -1, 1);
+        this.direction += power * Tank.rotationSpeed * Game.delta * (Math.PI /180);
     }
 
-    rotateTurret(rad) {
-        this.turretDirection += rad;
+    rotateTurret(power) {
+        power = Math.clamp(power, -1, 1);
+        this.turretDirection += power * Tank.turretRotationSpeed * Game.delta * (Math.PI /180);;
     }
 
     drawBody(ctx) {
