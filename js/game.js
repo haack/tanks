@@ -5,8 +5,8 @@ class Game {
         this.initialise();
 
         this.entities = [
-            new Tank(50, 50, 0),
-            new Tank(100, 50, Math.PI / 2)
+            new Tank(500, 500, 0),
+            new Tank(100, 500, Math.PI / 2)
         ];
 
         this.loop(Game.timestep);

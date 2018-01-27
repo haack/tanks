@@ -9,7 +9,10 @@ class Tank extends Entity {
     }
 
     update(delta) {
-        //
+        this.rotate(Tank.rotationSpeed * delta * (Math.PI /180));
+        this.rotateTurret(Tank.turretRotationSpeed * delta * (Math.PI /180));
+
+        this.drive(delta);
     }
 
     draw(ctx) {
@@ -18,8 +21,15 @@ class Tank extends Entity {
 
         this.drawBody(ctx);
         this.drawTurret(ctx);
+    }
 
-        ctx.resetTransform();
+    drive(delta) {
+        //move in direction
+        let dx = Math.sin(this.direction) * Tank.driveSpeed * delta;
+        let dy = -1 * Math.cos(this.direction) * Tank.driveSpeed * delta;
+
+        this.x += dx;
+        this.y += dy;
     }
 
     rotate(rad) {
@@ -52,5 +62,9 @@ class Tank extends Entity {
 
 Tank.bodyWidth = 20;
 Tank.bodyLength = 22;
+Tank.rotationSpeed = 30;
+Tank.driveSpeed = 50;
+
 Tank.turretWidth = 3;
 Tank.turretLength = 20;
+Tank.turretRotationSpeed = 90;
