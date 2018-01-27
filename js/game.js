@@ -1,8 +1,11 @@
 class Game {
     constructor() {
         this.canvas = document.getElementById("canvas");
+        this.ctx = canvas.getContext("2d");
 
         this.initialise();
+
+        this.map = new Map(this.canvas.width, this.canvas.height);
 
         this.entities = [
             new Tank(new Point(500, 500), 0),
@@ -41,21 +44,12 @@ class Game {
     }
 
     draw() {
-        var ctx = canvas.getContext("2d");
-
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-        ctx.resetTransform();
-
-        ctx.beginPath();
-        ctx.rect(0, 0, this.canvas.width, this.canvas.height);
-        ctx.fillStyle = "#222222";
-        ctx.fill();
-        ctx.closePath();
+        this.map.draw(this.ctx);
 
         // draw all entities
         for (let entity of this.entities) {
-            entity.draw(ctx);
-            ctx.resetTransform();
+            entity.draw(this.ctx);
+            this.ctx.resetTransform();
         }
     }
 }
