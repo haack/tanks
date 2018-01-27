@@ -1,9 +1,7 @@
 class Tank extends Entity {
-    constructor(x, y, direction) {
-        super();
+    constructor(position, direction) {
+        super(position);
 
-        this.x = x;
-        this.y = y;
         this.direction = direction;
         this.turretDirection = 0;
     }
@@ -16,7 +14,7 @@ class Tank extends Entity {
     }
 
     draw(ctx) {
-        ctx.translate(this.x, this.y);
+        ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.direction);
 
         this.drawBody(ctx);
@@ -28,8 +26,14 @@ class Tank extends Entity {
         let dx = Math.sin(this.direction) * Tank.driveSpeed * delta;
         let dy = -1 * Math.cos(this.direction) * Tank.driveSpeed * delta;
 
-        this.x += dx;
-        this.y += dy;
+        this.position.x += dx;
+        this.position.y += dy;
+    }
+
+    shoot() {
+        if (true) {
+            //add bullet to world
+        }
     }
 
     rotate(rad) {
