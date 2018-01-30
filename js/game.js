@@ -8,9 +8,8 @@ class Game {
         this.map = new Map(this.canvas.width, this.canvas.height);
 
         this.entities = [
-            new Tank(new Point(500, 500), 0),
-            // new Tank(new Point(100, 500), Math.PI / 2)
-            new Waypoint(200, 200)
+            new Tank(new Point(100, 500), Math.PI / 2),
+            new Waypoint(300, 300)
         ];
 
         this.loop(Game.timestep);
@@ -45,12 +44,14 @@ class Game {
     }
 
     draw() {
+        this.ctx.save();
         this.map.draw(this.ctx);
 
         // draw all entities
         for (let entity of this.entities) {
+            this.ctx.save();
             entity.draw(this.ctx);
-            this.ctx.resetTransform();
+            this.ctx.restore();
         }
     }
 }

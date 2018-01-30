@@ -11,10 +11,12 @@ class Point {
         return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 
-    getBearingTo(otherPoint) {
-        let dx = (this.x - otherPoint.x);
-        let dy = (this.y - otherPoint.y);
+    getBearingBetween(otherPoint) {
+        let dx = otherPoint.x - this.x;
+        let dy = this.y - otherPoint.y;
 
-        return Math.atan(dx / -dy);
+        let theta = Math.atan2(dx, dy);
+
+        return new Bearing(theta);
     }
 }

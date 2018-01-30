@@ -13,7 +13,7 @@ class Entity {
         }
     }
 
-    getBearingTo(targetPosition) {
-        return this.position.getBearingTo(targetPosition);
+    getBearingBetween(targetPosition) {
+        return this.position.getBearingBetween(targetPosition);
     }
 }
