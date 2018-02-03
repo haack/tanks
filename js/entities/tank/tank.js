@@ -21,8 +21,8 @@ class Tank extends Entity {
 
         ctx.rotate(this.direction.getRadians());
 
-        this.drawTracks(ctx);
         this.drawBody(ctx);
+        this.drawTracks(ctx);
         this.drawTurret(ctx);
         this.drawDirectionLine(ctx);
     }
@@ -38,16 +38,11 @@ class Tank extends Entity {
     turnTo(target) {
         // get bearing to target
         let bearingToTarget = this.position.getBearingBetween(target);
-        // console.log(bearingToTarget.getDegrees() - this.direction.getDegrees());
 
         let theta = bearingToTarget
             .addRadians(-this.direction.getRadians())
             .getDegrees();
-
         let thetaDifference = 180 - theta;
-
-        console.log(thetaDifference);
-
         let rotationPower = Math.sign(thetaDifference);
 
         // turn to bearing
