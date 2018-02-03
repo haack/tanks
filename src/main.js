@@ -1,4 +1,4 @@
-import game from './game';
+import Game from './game';
 
 // polyfill
 Math.clamp = function(number, min, max) {
@@ -6,4 +6,4 @@ Math.clamp = function(number, min, max) {
 }
 
 console.log("Starting game...");
-game.start();
+Game.start();

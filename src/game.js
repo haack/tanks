@@ -1,6 +1,7 @@
 import settings from './settings';
 
 import Map from './world/map';
+import Spawner from './world/spawner';
 import { Tank, Waypoint } from './entity';
 import { Point } from './util';
 
@@ -37,7 +38,7 @@ class Game {
     loop(delta) {
         this.delta = delta;
         this.loopCount = this.loopCount + 1;
-        console.log(`Loop: ${this.loopCount}`);
+        // console.log(`Loop: ${this.loopCount}`);
 
         this.update();
         this.draw();
@@ -64,6 +65,10 @@ class Game {
             entity.draw(this.ctx);
             this.ctx.restore();
         }
+    }
+
+    addEntity(entity) {
+        this.entities.push(entity);
     }
 }
 

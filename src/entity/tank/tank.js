@@ -1,4 +1,5 @@
-import game from '../../game';
+import Game from '../../game';
+import Spawner from '../../world/spawner';
 import Entity from '../entity';
 import { Bearing } from '../../util';
 import { Waypoint } from '../'
@@ -9,14 +10,16 @@ class Tank extends Entity {
 
         this.direction = new Bearing(direction);
         this.turretDirection = new Bearing(direction);
-
-        this.bullets = [];
     }
 
     update() {
         this.navigateTo(new Waypoint(300, 300));
         this.rotateTurret(Tank.turretRotationSpeed);
         this.drive(1);
+
+        if (Game.loopCount % 20 == 0) {
+            this.shoot();
+        }
     }
 
     draw(ctx) {
@@ -57,8 +60,8 @@ class Tank extends Entity {
     drive(power) {
         power = Math.clamp(power, -1, 1);
 
-        let dx = power * Math.sin(this.direction.getRadians()) * Tank.driveSpeed * game.delta;
-        let dy = -1 * power * Math.cos(this.direction.getRadians()) * Tank.driveSpeed * game.delta;
+        let dx = power * Math.sin(this.direction.getRadians()) * Tank.driveSpeed * Game.delta;
+        let dy = -1 * power * Math.cos(this.direction.getRadians()) * Tank.driveSpeed * Game.delta;
 
         this.position.x += dx;
         this.position.y += dy;
@@ -66,18 +69,18 @@ class Tank extends Entity {
 
     shoot() {
         if (true) {
-            //add bullet to world
+            Spawner.bullet(this.position, this.direction.getRadians() + this.turretDirection.getRadians());
         }
     }
 
     rotate(power) {
         power = Math.clamp(power, -1, 1);
-        this.direction.addDegrees(power * Tank.rotationSpeed * game.delta);
+        this.direction.addDegrees(power * Tank.rotationSpeed * Game.delta);
     }
 
     rotateTurret(power) {
         power = Math.clamp(power, -1, 1);
-        this.turretDirection.addDegrees(power * Tank.turretRotationSpeed * game.delta);
+        this.turretDirection.addDegrees(power * Tank.turretRotationSpeed * Game.delta);
     }
 
     drawBody(ctx) {

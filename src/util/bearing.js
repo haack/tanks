@@ -31,6 +31,10 @@ class Bearing {
         this.addRadians(radToAdd);
         return this;
     }
+
+    clone() {
+        return new Bearing(this.getRadians());
+    }
 }
 
 Bearing.MAX = Math.PI * 2;

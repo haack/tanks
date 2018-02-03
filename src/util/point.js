@@ -21,6 +21,10 @@ class Point {
 
         return new Bearing(theta);
     }
+
+    clone() {
+        return new Point(this.x, this.y);
+    }
 }
 
 export default Point;
