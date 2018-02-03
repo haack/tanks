@@ -17,3 +17,5 @@ class Entity {
         return this.position.getBearingBetween(targetPosition);
     }
 }
+
+export default Entity;

@@ -1,3 +1,9 @@
+import settings from './settings';
+
+import Map from './world/map';
+import { Tank, Waypoint } from './entity';
+import { Point } from './util';
+
 class Game {
     constructor() {
         this.canvas = document.getElementById("canvas");
@@ -7,12 +13,13 @@ class Game {
 
         this.map = new Map(this.canvas.width, this.canvas.height);
 
+        this.delta = 0;
+        this.loopCount = 0
+
         this.entities = [
             new Tank(new Point(100, 500), Math.PI / 2),
             new Waypoint(300, 300)
         ];
-
-        this.loop(Game.timestep);
     }
 
     initialise() {
@@ -23,17 +30,21 @@ class Game {
         this.canvas.height = window.innerHeight;
     }
 
+    start() {
+        this.loop(settings.timestep);
+    }
+
     loop(delta) {
-        Game.delta = delta;
-        Game.loopCount = Game.loopCount + 1;
-        console.log(`Loop: ${Game.loopCount}`);
+        this.delta = delta;
+        this.loopCount = this.loopCount + 1;
+        console.log(`Loop: ${this.loopCount}`);
 
         this.update();
         this.draw();
 
         // loop with fixed timestep
         // the game will slow down as updates take longer (the space invaders effect)
-        setTimeout(() => this.loop(Game.timestep), Game.timestep * 1000);
+        setTimeout(() => this.loop(settings.timestep), settings.timestep * 1000);
     }
 
     update(delta) {
@@ -56,6 +67,4 @@ class Game {
     }
 }
 
-Game.timestep = 30 / 1000;
-Game.delta = 0;
-Game.loopCount = 0;
+export default (new Game);

@@ -15,3 +15,5 @@ class Map {
         ctx.closePath();
     }
 }
+
+export default Map;

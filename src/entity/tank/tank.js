@@ -1,3 +1,8 @@
+import game from '../../game';
+import Entity from '../entity';
+import { Bearing } from '../../util';
+import { Waypoint } from '../'
+
 class Tank extends Entity {
     constructor(position, direction) {
         super(position);
@@ -52,8 +57,8 @@ class Tank extends Entity {
     drive(power) {
         power = Math.clamp(power, -1, 1);
 
-        let dx = power * Math.sin(this.direction.getRadians()) * Tank.driveSpeed * Game.delta;
-        let dy = -1 * power * Math.cos(this.direction.getRadians()) * Tank.driveSpeed * Game.delta;
+        let dx = power * Math.sin(this.direction.getRadians()) * Tank.driveSpeed * game.delta;
+        let dy = -1 * power * Math.cos(this.direction.getRadians()) * Tank.driveSpeed * game.delta;
 
         this.position.x += dx;
         this.position.y += dy;
@@ -67,12 +72,12 @@ class Tank extends Entity {
 
     rotate(power) {
         power = Math.clamp(power, -1, 1);
-        this.direction.addDegrees(power * Tank.rotationSpeed * Game.delta);
+        this.direction.addDegrees(power * Tank.rotationSpeed * game.delta);
     }
 
     rotateTurret(power) {
         power = Math.clamp(power, -1, 1);
-        this.turretDirection.addDegrees(power * Tank.turretRotationSpeed * Game.delta);
+        this.turretDirection.addDegrees(power * Tank.turretRotationSpeed * game.delta);
     }
 
     drawBody(ctx) {
@@ -173,3 +178,5 @@ Tank.turretLength = 18;
 Tank.turretRotationSpeed = 90;
 
 Tank.turretBaseWidth = 10;
+
+export default Tank;

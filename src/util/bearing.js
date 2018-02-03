@@ -34,3 +34,5 @@ class Bearing {
 }
 
 Bearing.MAX = Math.PI * 2;
+
+export default Bearing;

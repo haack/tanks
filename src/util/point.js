@@ -1,3 +1,5 @@
+import { Bearing } from '.';
+
 class Point {
     constructor(x, y) {
         this.x = x;
@@ -20,3 +22,5 @@ class Point {
         return new Bearing(theta);
     }
 }
+
+export default Point;

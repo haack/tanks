@@ -1,0 +1,15 @@
+{
+  "name": "tanks",
+  "version": "0.0.1",
+  "description": "Pew pew pew",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "haack",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}

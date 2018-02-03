@@ -1,3 +1,5 @@
+import { Point } from '../util';
+
 class Waypoint extends Point {
     draw(ctx) {
         ctx.translate(this.x, this.y);
@@ -11,3 +13,5 @@ class Waypoint extends Point {
 
     }
 }
+
+export default Waypoint;
