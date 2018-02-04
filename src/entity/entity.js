@@ -8,7 +8,7 @@ class Entity {
     draw(ctx) {}
 
     at(targetPosition) {
-        if (this.position.distanceTo(targetPosition) < 1.) {
+        if (this.position.distanceTo(targetPosition) < 5.) {
             return true;
         }
     }

@@ -13,34 +13,20 @@ class Tank extends Entity {
     }
 
     update() {
-        this.navigateTo(new Waypoint(new Point(300, 300)).position);
-        this.rotateTurret(Tank.turretRotationSpeed);
-        this.drive(1);
 
-        if (Game.loopCount % 20 == 0) {
-            this.shoot();
-        }
     }
 
     draw(ctx) {
         ctx.translate(this.position.x, this.position.y);
 
-        this.drawTargetLine(ctx);
+        // this.drawTargetLine(ctx);
 
         ctx.rotate(this.direction.getRadians());
 
         this.drawBody(ctx);
         this.drawTracks(ctx);
         this.drawTurret(ctx);
-        this.drawDirectionLine(ctx);
-    }
-
-    navigateTo(target) {
-        if (!this.at(target)) {
-            this.turnTo(target);
-        } else {
-            console.log("Target reached...");
-        }
+        // this.drawDirectionLine(ctx);
     }
 
     turnTo(target) {

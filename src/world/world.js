@@ -1,7 +1,8 @@
 import Game from '../game';
 
 import Spawner from './spawner';
-import { Entity, Tank, Waypoint } from '../entity';
+import { Entity, Waypoint } from '../entity';
+import Bot from '../bot/bot';
 import { Point } from '../util';
 
 class World {
@@ -10,13 +11,21 @@ class World {
         this.height = height;
 
         this.entities = [
-            new Tank(new Point(100, 500), Math.PI / 2),
-            new Waypoint(new Point(300, 300))
+            new Bot(new Point(100, 500), 0)
         ];
     }
 
     addEntity(entity) {
         this.entities.push(entity);
+    }
+
+    removeEntity(entity) {
+        for (let i in this.entities) {
+            if (this.entities[i] === entity) {
+                this.entities.splice(i, 1);
+                break;
+            }
+        }
     }
 
     draw(ctx) {
@@ -43,7 +52,7 @@ class World {
             let entity = this.entities[i];
             entity.update(Game.delta);
 
-            if ((entity.position.x < 0 || entity.position.x > this.width) || (entity.position.y < 0 || entity.position.y > this.height)) {
+            if ((entity.position.x < -100 || entity.position.x > this.width) || (entity.position.y < -100 || entity.position.y > this.height)) {
                 this.entities.splice(i, 1);
                 i--;
             }
