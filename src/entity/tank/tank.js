@@ -38,8 +38,9 @@ class Tank extends Entity {
 
         let theta = bearingToTarget
             .addRadians(-this.direction.getRadians())
-            .getDegrees();
-        let thetaDifference = 180 - theta;
+            .getRadians();
+
+        let thetaDifference = Math.PI - theta;
         let rotationPower = Math.sign(thetaDifference);
 
         // turn to bearing
@@ -181,7 +182,7 @@ Tank.trackLength = 27;
 Tank.trackSpacing = 14;
 
 Tank.turretWidth = 6;
-Tank.turretLength = 18;
+Tank.turretLength = 20;
 Tank.turretRotationSpeed = 90;
 
 Tank.turretBaseWidth = 10;
