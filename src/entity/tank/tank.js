@@ -173,8 +173,8 @@ class Tank extends Entity {
 
 Tank.bodyWidth = 20;
 Tank.bodyLength = 22;
-Tank.rotationSpeed = 30;
-Tank.driveSpeed = 50;
+Tank.rotationSpeed = 60;
+Tank.driveSpeed = 100;
 
 Tank.trackWidth = 7;
 Tank.trackLength = 27;

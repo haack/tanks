@@ -7,8 +7,8 @@ import { Point } from '../util';
 
 class World {
     constructor(width, height) {
-        this.width = width;
-        this.height = height;
+        this.width = width / World.scale;
+        this.height = height / World.scale;
 
         this.entities = [
             new Bot(new Point(100, 500), 0)
@@ -29,8 +29,9 @@ class World {
     }
 
     draw(ctx) {
-        ctx.clearRect(0, 0, this.width, this.height)
-        ctx.resetTransform();
+        ctx.scale(World.scale, World.scale);
+
+        ctx.clearRect(0, 0, this.width, this.height);
 
         ctx.beginPath();
         ctx.rect(0, 0, this.width, this.height);
@@ -59,5 +60,7 @@ class World {
         }
     }
 }
+
+World.scale = 0.8;
 
 export default World;
