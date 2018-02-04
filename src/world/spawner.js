@@ -6,7 +6,7 @@ class Spawner {
 
     bullet(point, direction) {
         let bullet = new Bullet(point.clone(), direction);
-        Game.addEntity(bullet);
+        Game.world.addEntity(bullet);
     }
 }
 

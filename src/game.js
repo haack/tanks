@@ -1,9 +1,6 @@
 import settings from './settings';
 
-import Map from './world/map';
-import Spawner from './world/spawner';
-import { Tank, Waypoint } from './entity';
-import { Point } from './util';
+import World from './world/world';
 
 class Game {
     constructor() {
@@ -12,15 +9,10 @@ class Game {
 
         this.initialise();
 
-        this.map = new Map(this.canvas.width, this.canvas.height);
+        this.world = new World(this.canvas.width, this.canvas.height);
 
         this.delta = 0;
         this.loopCount = 0
-
-        this.entities = [
-            new Tank(new Point(100, 500), Math.PI / 2),
-            new Waypoint(300, 300)
-        ];
     }
 
     initialise() {
@@ -38,37 +30,34 @@ class Game {
     loop(delta) {
         this.delta = delta;
         this.loopCount = this.loopCount + 1;
-        // console.log(`Loop: ${this.loopCount}`);
 
         this.update();
         this.draw();
+
+        this.gameStats();
 
         // loop with fixed timestep
         // the game will slow down as updates take longer (the space invaders effect)
         setTimeout(() => this.loop(settings.timestep), settings.timestep * 1000);
     }
 
-    update(delta) {
-        // update all entities
-        for (let entity of this.entities) {
-            entity.update(delta);
-        }
+    update() {
+        this.world.update();
     }
 
     draw() {
         this.ctx.save();
-        this.map.draw(this.ctx);
-
-        // draw all entities
-        for (let entity of this.entities) {
-            this.ctx.save();
-            entity.draw(this.ctx);
-            this.ctx.restore();
-        }
+        this.world.draw(this.ctx);
+        this.ctx.restore();
     }
 
-    addEntity(entity) {
-        this.entities.push(entity);
+    gameStats() {
+        if (this.loopCount % 500 === 0) {
+            console.log(`=========STATS=========`);
+            console.log(`Loop count: ${this.loopCount}`);
+            console.log(`Entity count: ${this.world.entities.length}`);
+            console.log(`=======================`);
+        }
     }
 }
 
