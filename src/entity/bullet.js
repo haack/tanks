@@ -20,7 +20,6 @@ class Bullet extends Entity {
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.direction.getRadians());
 
-        ctx.translate(this.x, this.y);
         ctx.beginPath();
         ctx.rect(-1, -1, 2, 8);
         ctx.strokeStyle = "#00fffa";

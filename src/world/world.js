@@ -11,7 +11,7 @@ class World {
 
         this.entities = [
             new Tank(new Point(100, 500), Math.PI / 2),
-            new Waypoint(300, 300)
+            new Waypoint(new Point(300, 300))
         ];
     }
 
@@ -39,8 +39,14 @@ class World {
 
     update() {
         // update all entities
-        for (let entity of this.entities) {
+        for (let i = 0; i < this.entities.length; i++) {
+            let entity = this.entities[i];
             entity.update(Game.delta);
+
+            if ((entity.position.x < 0 || entity.position.x > this.width) || (entity.position.y < 0 || entity.position.y > this.height)) {
+                this.entities.splice(i, 1);
+                i--;
+            }
         }
     }
 }

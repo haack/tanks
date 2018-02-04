@@ -1,8 +1,8 @@
 import Game from '../../game';
 import Spawner from '../../world/spawner';
 import Entity from '../entity';
-import { Bearing } from '../../util';
-import { Waypoint } from '../'
+import { Bearing, Point } from '../../util';
+import { Waypoint } from '../';
 
 class Tank extends Entity {
     constructor(position, direction) {
@@ -13,7 +13,7 @@ class Tank extends Entity {
     }
 
     update() {
-        this.navigateTo(new Waypoint(300, 300));
+        this.navigateTo(new Waypoint(new Point(300, 300)).position);
         this.rotateTurret(Tank.turretRotationSpeed);
         this.drive(1);
 
@@ -154,7 +154,7 @@ class Tank extends Entity {
     drawTargetLine(ctx) {
         ctx.save();
 
-        ctx.rotate(this.position.getBearingBetween(new Waypoint(300, 300)).getRadians());
+        ctx.rotate(this.position.getBearingBetween(new Waypoint(new Point(300, 300)).position).getRadians());
 
         ctx.beginPath();
         ctx.setLineDash([5, 15]);
