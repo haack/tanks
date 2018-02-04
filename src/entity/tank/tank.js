@@ -5,11 +5,13 @@ import { Bearing, Point } from '../../util';
 import { Waypoint } from '../';
 
 class Tank extends Entity {
-    constructor(position, direction) {
+    constructor(position, direction, color) {
         super(position);
 
         this.direction = new Bearing(direction);
         this.turretDirection = new Bearing(direction);
+
+        this.color = color;
     }
 
     update() {
@@ -20,6 +22,7 @@ class Tank extends Entity {
         ctx.translate(this.position.x, this.position.y);
 
         // this.drawTargetLine(ctx);
+        this.drawRing(ctx);
 
         ctx.rotate(this.direction.getRadians());
 
@@ -150,6 +153,21 @@ class Tank extends Entity {
         ctx.stroke();
 
         ctx.restore();
+    }
+
+    drawRing(ctx) {
+        if (this.color) {
+            ctx.save();
+
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = this.color;
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 30, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 }
 

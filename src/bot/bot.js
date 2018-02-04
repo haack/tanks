@@ -6,7 +6,7 @@ import { Point } from '../util';
 
 class Bot extends Tank {
     constructor(position, bearing) {
-        super(position, bearing);
+        super(position, bearing, 'rgba(94, 155, 255, 0.8)');
 
         this.target = null;
     }
