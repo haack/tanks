@@ -1,6 +1,8 @@
 class Entity {
-    constructor(position) {
+    constructor(position, direction, bounds) {
         this.position = position;
+        this.direction = direction;
+        this.bounds = bounds;
     }
 
     update() {}

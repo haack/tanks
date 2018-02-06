@@ -6,9 +6,8 @@ import { Waypoint } from '../';
 
 class Tank extends Entity {
     constructor(position, direction, color) {
-        super(position);
+        super(position, new Bearing(direction));
 
-        this.direction = new Bearing(direction);
         this.turretDirection = new Bearing(direction);
 
         this.color = color;
@@ -118,12 +117,12 @@ class Tank extends Entity {
         ctx.fill();
         ctx.closePath();
 
-        ctx.beginPath();
-        ctx.setLineDash([5, 15]);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(0, -100);
-        ctx.strokeStyle = "#6666FF";
-        ctx.stroke();
+        // ctx.beginPath();
+        // ctx.setLineDash([5, 15]);
+        // ctx.moveTo(0, 0);
+        // ctx.lineTo(0, -100);
+        // ctx.strokeStyle = "#6666FF";
+        // ctx.stroke();
 
         ctx.restore();
     }
@@ -164,8 +163,20 @@ class Tank extends Entity {
             ctx.strokeStyle = this.color;
 
             ctx.beginPath();
+
+            ctx.globalAlpha = 0.3;
+            ctx.arc(0, 0, 27, 0, 2 * Math.PI);
+            ctx.arc(0, 0, 33, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.globalAlpha = 0.7;
             ctx.arc(0, 0, 30, 0, 2 * Math.PI);
             ctx.stroke();
+
+            ctx.closePath();
 
             ctx.restore();
         }
