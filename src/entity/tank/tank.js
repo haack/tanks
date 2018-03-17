@@ -20,7 +20,6 @@ class Tank extends Entity {
     draw(ctx) {
         ctx.translate(this.position.x, this.position.y);
 
-        // this.drawTargetLine(ctx);
         this.drawRing(ctx);
 
         ctx.rotate(this.direction.getRadians());
@@ -28,7 +27,6 @@ class Tank extends Entity {
         this.drawBody(ctx);
         this.drawTracks(ctx);
         this.drawTurret(ctx);
-        // this.drawDirectionLine(ctx);
     }
 
     turnTo(target) {
@@ -116,41 +114,6 @@ class Tank extends Entity {
         ctx.fillStyle = "#FFFFFF";
         ctx.fill();
         ctx.closePath();
-
-        // ctx.beginPath();
-        // ctx.setLineDash([5, 15]);
-        // ctx.moveTo(0, 0);
-        // ctx.lineTo(0, -100);
-        // ctx.strokeStyle = "#6666FF";
-        // ctx.stroke();
-
-        ctx.restore();
-    }
-
-    drawDirectionLine(ctx) {
-        ctx.save();
-
-        ctx.beginPath();
-        ctx.setLineDash([5, 15]);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(0, -200);
-        ctx.strokeStyle = "#00FF00";
-        ctx.stroke();
-
-        ctx.restore();
-    }
-
-    drawTargetLine(ctx) {
-        ctx.save();
-
-        ctx.rotate(this.position.getBearingBetween(new Waypoint(new Point(300, 300)).position).getRadians());
-
-        ctx.beginPath();
-        ctx.setLineDash([5, 15]);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(0, -200);
-        ctx.strokeStyle = "#FF0000";
-        ctx.stroke();
 
         ctx.restore();
     }
