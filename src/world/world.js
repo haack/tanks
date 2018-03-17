@@ -2,7 +2,7 @@ import Game from '../game';
 
 import Spawner from './spawner';
 import { Entity, Waypoint } from '../entity';
-import Bot from '../bot/bot';
+import RCTank from '../rctank/rctank';
 import { Point } from '../util';
 
 class World {
@@ -10,8 +10,10 @@ class World {
         this.width = width / World.scale;
         this.height = height / World.scale;
 
+        this.bot = new RCTank(new Point(100, 500), 0);
+
         this.entities = [
-            new Bot(new Point(100, 500), 0)
+            this.bot
         ];
     }
 
