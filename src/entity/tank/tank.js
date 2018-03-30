@@ -11,10 +11,19 @@ class Tank extends Entity {
         this.turretDirection = new Bearing(direction);
 
         this.color = color;
+
+        this.remainingTimeToReload = 0;
     }
 
     update() {
+        this.updateReload();
+    }
 
+    updateReload() {
+        if (this.remainingTimeToReload > 0) {
+            this.remainingTimeToReload -= Game.delta;
+            this.remainingTimeToReload = Math.max(this.remainingTimeToReload, 0);
+        }
     }
 
     draw(ctx) {
@@ -55,8 +64,9 @@ class Tank extends Entity {
     }
 
     shoot() {
-        if (true) {
+        if (this.remainingTimeToReload <= 0) {
             Spawner.bullet(this.position, this.direction.getRadians() + this.turretDirection.getRadians());
+            this.remainingTimeToReload += Tank.timeToReload;
         }
     }
 
@@ -160,5 +170,7 @@ Tank.turretLength = 20;
 Tank.turretRotationSpeed = 90;
 
 Tank.turretBaseWidth = 10;
+
+Tank.timeToReload = 1;
 
 export default Tank;

@@ -2,7 +2,7 @@ import Game from '../game';
 
 import Spawner from './spawner';
 import { Entity, Waypoint } from '../entity';
-import { Point } from '../util';
+import { Point, Bearing } from '../util';
 
 import RCTank from '../rctank/rctank';
 
@@ -19,7 +19,7 @@ class World {
     }
 
     addBot(code) {
-        let bot = new RCTank(new Point(100, 100), 0, code);
+        let bot = new RCTank(new Point(100, 100), Math.PI / 3 * 2, code);
         this.entities.push(bot);
     }
 

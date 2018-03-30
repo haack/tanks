@@ -6,12 +6,9 @@ Math.clamp = function(number, min, max) {
 }
 
 const defaultBotCode = `class MyBot extends Bot {
-	start() {
-		// initialisation
-	}
-
 	update() {
 		// logic on update
+        this.rotateTurret(1);
 	}
 }`;
 

@@ -1,30 +1,35 @@
-let userBotContext = null;
+let botEnv = null;
 
 //TODO: pull into seperate file
 class Bot {
     constructor() {
-        this.drivePower = 0;
-        this.rotatePower = 0;
-        this.turretRotatePower = 0;
+        this.__drivePower = 0;
+        this.__rotatePower = 0;
+        this.__turretRotatePower = 0;
     }
 
     drive(power) {
-        this.drivePower = power;
+        this.__drivePower = power;
+    }
+
+    shoot() {
+        this.__shootRequest = true;
     }
 
     rotate(power) {
-        this.rotatePower = power;
+        this.__rotatePower = power;
     }
 
     rotateTurret(power) {
-        this.turretRotatePower = power;
+        this.__turretRotatePower = power;
     }
 
-    getState() {
+    __getState() {
         return {
-            drivePower: this.drivePower,
-            rotatePower: this.rotatePower,
-            turretRotatePower: this.turretRotatePower
+            drivePower: this.__drivePower || 0,
+            rotatePower: this.__rotatePower || 0,
+            turretRotatePower: this.__turretRotatePower || 0,
+            shootRequest: this.__shootRequest || false,
         }
     }
 }
@@ -36,20 +41,19 @@ onmessage = e => {
     var e = null;
 
     switch (action) {
-        case "start":
-            userBotContext = eval(`
+        case "load":
+            botEnv = eval(`
                 new ${code};
             `);
             //TODO: handle bad stuff here
 
-            userBotContext.start();
             break;
         case "update":
-            userBotContext.update();
+            botEnv.update();
             break;
         default:
             throw new Error("Invalid action");
     }
 
-    self.postMessage(userBotContext.getState());
+    self.postMessage(botEnv.__getState());
 };
