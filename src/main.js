@@ -9,7 +9,9 @@ const defaultBotCode = `class MyBot extends Bot {
 	update() {
 		// insert logic here
 	}
-}`;
+}
+
+module.exports = MyBot;`;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     theme: 'monokai',

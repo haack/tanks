@@ -53,9 +53,14 @@ onmessage = e => {
     switch (action) {
         case "load":
 
-            botEnv = eval(`
-                new ${code};
+            let userExport = eval(`
+                let module = {};
+                ${code};
+                module.exports;
             `);
+
+            botEnv = new userExport();
+            
             //TODO: handle bad stuff here
 
             botEnv.__cacheState(stateUpdate);
