@@ -20,8 +20,8 @@ class Game {
     initialise() {
         let computedStyle = getComputedStyle(this.canvas);
 
-        this.canvas.width = parseInt(computedStyle.getPropertyValue('width'),10);
-        this.canvas.height = parseInt(computedStyle.getPropertyValue('height'),10);
+        this.canvas.width = parseInt(computedStyle.getPropertyValue('width'), 10);
+        this.canvas.height = parseInt(computedStyle.getPropertyValue('height'), 10);
     }
 
     addBot(code) {

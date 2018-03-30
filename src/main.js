@@ -2,19 +2,18 @@ import Game from './game';
 
 // polyfill
 Math.clamp = function(number, min, max) {
-  return Math.max(min, Math.min(number, max));
+    return Math.max(min, Math.min(number, max));
 }
 
 const defaultBotCode = `class MyBot extends Bot {
 	update() {
-		// logic on update
-        this.rotateTurret(1);
+		// insert logic here
 	}
 }`;
 
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     theme: 'monokai',
-    mode: "javascript",
+    mode: 'javascript',
     lineNumbers: true,
     smartIndent: true,
     indentWithTabs: true,
@@ -23,7 +22,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineWrapping: true,
 });
 
-editor.getDoc().setValue(defaultBotCode);
+editor.getDoc().setValue(localStorage.getItem('code') || defaultBotCode);
 
 $('#stop-code').click(() => {
     Game.stop();
@@ -31,6 +30,7 @@ $('#stop-code').click(() => {
 
 $('#run-code').click(() => {
     let code = editor.getDoc().getValue();
+    localStorage.setItem('code', code)
     Game.addBot(code)
     Game.start();
 })

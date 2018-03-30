@@ -136,20 +136,21 @@ class Tank extends Entity {
             ctx.strokeStyle = this.color;
 
             ctx.beginPath();
-
             ctx.globalAlpha = 0.3;
-            ctx.arc(0, 0, 27, 0, 2 * Math.PI);
             ctx.arc(0, 0, 33, 0, 2 * Math.PI);
             ctx.stroke();
-
             ctx.closePath();
 
             ctx.beginPath();
             ctx.globalAlpha = 0.7;
             ctx.arc(0, 0, 30, 0, 2 * Math.PI);
             ctx.stroke();
-
             ctx.closePath();
+
+            ctx.beginPath();
+            ctx.globalAlpha = 1;
+            ctx.arc(0, 0, 27, 0, 2 * Math.PI);
+            ctx.stroke();
 
             ctx.restore();
         }
