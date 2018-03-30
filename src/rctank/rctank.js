@@ -13,14 +13,25 @@ class RCTank extends Tank {
     constructor(position, bearing, code) {
         super(position, bearing, 'rgba(94, 155, 255, 0.8)');
 
-        worker.postMessage(["load", code]);
+        let initialState = {
+            tank: this.getBaseState(),
+            world: {
+                width: Game.world.width,
+                height: Game.world.height,
+            }
+        };
+
+        worker.postMessage(["load", initialState, code]);
         worker.onmessage = (res) => this.sandboxResponse(res);
     }
 
     update() {
         super.update();
 
-        setTimeout(() => worker.postMessage(["update"]), 1000/30);
+        let updateState = Game.world.getState();
+        updateState.entities = updateState
+            .entities.filter(entity => entity.id !== this.id);
+        worker.postMessage(["update", updateState]);
     }
 
     sandboxResponse(res) {

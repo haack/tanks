@@ -3,54 +3,71 @@ let botEnv = null;
 //TODO: pull into seperate file
 class Bot {
     constructor() {
-        this.__drivePower = 0;
-        this.__rotatePower = 0;
-        this.__turretRotatePower = 0;
+        this.__commands = {
+            drivePower: 0,
+            rotatePower: 0,
+            turretRotatePower: 0,
+            shootRequest: false,
+        };
     }
 
     drive(power) {
-        this.__drivePower = power;
+        this.__commands.drivePower = power;
     }
 
     shoot() {
-        this.__shootRequest = true;
+        this.__commands.shootRequest = true;
     }
 
     rotate(power) {
-        this.__rotatePower = power;
+        this.__commands.rotatePower = power;
     }
 
     rotateTurret(power) {
-        this.__turretRotatePower = power;
+        this.__commands.turretRotatePower = power;
+    }
+
+    scan() {
+        return this.__state.entities;
+    }
+
+    __cacheState(update) {
+        // merge already cached state with new updates (TODO: does this do a deep merge???)
+        this.__state = {
+            ...this.__state,
+            ...update,
+        };
     }
 
     __getState() {
-        return {
-            drivePower: this.__drivePower || 0,
-            rotatePower: this.__rotatePower || 0,
-            turretRotatePower: this.__turretRotatePower || 0,
-            shootRequest: this.__shootRequest || false,
-        }
+        return this.__commands;
     }
 }
 
 onmessage = e => {
     let action = e.data[0];
-    let code = e.data[1];
-
+    let stateUpdate = e.data[1];
+    let code = e.data[2];
     var e = null;
 
     switch (action) {
         case "load":
+
             botEnv = eval(`
                 new ${code};
             `);
             //TODO: handle bad stuff here
 
+            botEnv.__cacheState(stateUpdate);
+            botEnv.create();
             break;
+
         case "update":
+            botEnv.__cacheState(stateUpdate);
+
             botEnv.update();
             break;
+
         default:
             throw new Error("Invalid action");
     }

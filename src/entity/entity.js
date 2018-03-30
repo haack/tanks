@@ -1,8 +1,9 @@
 class Entity {
-    constructor(position, direction, bounds) {
+    constructor(position, direction, type) {
         this.position = position;
         this.direction = direction;
-        this.bounds = bounds;
+        this.type = type;
+        this.id = Entity.nextId++;
     }
 
     update() {}
@@ -18,6 +19,16 @@ class Entity {
     getBearingBetween(targetPosition) {
         return this.position.getBearingBetween(targetPosition);
     }
+
+    getBaseState() {
+        return {
+            position: this.position,
+            id: this.id,
+            type: this.constructor.name
+        }
+    }
 }
+
+Entity.nextId = 1;
 
 export default Entity;

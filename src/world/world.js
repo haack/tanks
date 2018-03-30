@@ -10,12 +10,11 @@ class World {
     constructor(width, height) {
         this.width = width / World.scale;
         this.height = height / World.scale;
-
-        this.initialise();
     }
 
     initialise() {
         this.entities = [];
+        Spawner.randomWaypoint();
     }
 
     addBot(code) {
@@ -34,6 +33,13 @@ class World {
                 break;
             }
         }
+    }
+
+    getState() {
+        return {
+            delta: Game.delta,
+            entities: this.entities.map(entity => entity.getBaseState()), //TODO: filter to reduce size sent to worker
+        };
     }
 
     draw(ctx) {
@@ -59,7 +65,7 @@ class World {
         // update all entities
         for (let i = 0; i < this.entities.length; i++) {
             let entity = this.entities[i];
-            entity.update(Game.delta);
+            entity.update();
 
             if ((entity.position.x < -100 || entity.position.x > this.width) || (entity.position.y < -100 || entity.position.y > this.height)) {
                 this.entities.splice(i, 1);
