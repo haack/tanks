@@ -2,19 +2,25 @@ import Game from '../game';
 
 import Spawner from './spawner';
 import { Entity, Waypoint } from '../entity';
-import RCTank from '../rctank/rctank';
 import { Point } from '../util';
+
+import RCTank from '../rctank/rctank';
 
 class World {
     constructor(width, height) {
         this.width = width / World.scale;
         this.height = height / World.scale;
 
-        this.bot = new RCTank(new Point(100, 500), 0);
+        this.initialise();
+    }
 
-        this.entities = [
-            this.bot
-        ];
+    initialise() {
+        this.entities = [];
+    }
+
+    addBot(code) {
+        let bot = new RCTank(new Point(100, 100), 0, code);
+        this.entities.push(bot);
     }
 
     addEntity(entity) {
@@ -37,7 +43,7 @@ class World {
 
         ctx.beginPath();
         ctx.rect(0, 0, this.width, this.height);
-        ctx.fillStyle = "#222222";
+        ctx.fillStyle = "#272822";
         ctx.fill();
         ctx.closePath();
 

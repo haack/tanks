@@ -12,22 +12,41 @@ class Game {
         this.world = new World(this.canvas.width, this.canvas.height);
 
         this.delta = 0;
-        this.loopCount = 0
+        this.loopCount = 0;
+
+        this.loopTimeout = null;
     }
 
     initialise() {
-        this.canvas.style.width = window.innerWidth + "px";
-        this.canvas.style.height = window.innerHeight + "px";
+        let computedStyle = getComputedStyle(this.canvas);
 
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = parseInt(computedStyle.getPropertyValue('width'),10);
+        this.canvas.height = parseInt(computedStyle.getPropertyValue('height'),10);
+    }
+
+    addBot(code) {
+        this.world.initialise();
+        this.world.addBot(code);
     }
 
     start() {
-        this.loop(settings.timestep);
+        if (!this.loopTimeout) {
+            this.loop(settings.timestep);
+        }
+    }
+
+    stop() {
+        if (this.loopTimeout) {
+            clearTimeout(this.loopTimeout);
+            this.loopTimeout = null;
+        }
     }
 
     loop(delta) {
+        if (this.loopTimeout) {
+            clearTimeout(this.loopTimeout);
+        }
+
         this.delta = delta;
         this.loopCount = this.loopCount + 1;
 
@@ -37,8 +56,8 @@ class Game {
         this.gameStats();
 
         // loop with fixed timestep
-        // the game will slow down as updates take longer (the space invaders effect)
-        setTimeout(() => this.loop(settings.timestep), settings.timestep * 1000);
+        // the game will slow down as updates take longer (the space invaders effect), especially with complex bot logic
+        this.loopTimeout = setTimeout(() => this.loop(settings.timestep), settings.timestep * 1000);
     }
 
     update() {
