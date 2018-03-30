@@ -1,5 +1,5 @@
 import Entity from '../entity';
-import { Bearing } from '../../util';
+import { Bearing } from '../../../util';
 
 class Waypoint extends Entity {
     constructor(position) {

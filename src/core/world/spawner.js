@@ -1,6 +1,6 @@
 import Game from '../game';
 import { Bullet, Waypoint } from '../entity/';
-import { Point } from '../util';
+import { Point } from '../../util';
 
 class Spawner {
     constructor() {}

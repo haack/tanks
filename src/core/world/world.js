@@ -2,7 +2,7 @@ import Game from '../game';
 
 import Spawner from './spawner';
 import { Entity, Waypoint } from '../entity';
-import { Point, Bearing } from '../util';
+import { Point, Bearing } from '../../util';
 
 import RCTank from '../rctank/rctank';
 

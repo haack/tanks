@@ -1,7 +1,7 @@
 import Game from '../../game';
 import Spawner from '../../world/spawner';
 import Entity from '../entity';
-import { Bearing, Point } from '../../util';
+import { Bearing, Point } from '../../../util';
 import { Waypoint } from '../';
 
 class Tank extends Entity {

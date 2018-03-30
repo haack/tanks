@@ -2,11 +2,11 @@ import Game from '../game';
 import Spawner from '../world/spawner';
 
 import { Tank, Waypoint } from '../entity';
-import { Point } from '../util';
+import { Point } from '../../util';
 
 //TODO: load with secure headers
 //TODO: seperate worker for each rctank
-let worker = new Worker("../sandbox.js");
+let worker = new Worker("/build/sandbox-bundle.js");
 
 // Remote controlled tank
 class RCTank extends Tank {

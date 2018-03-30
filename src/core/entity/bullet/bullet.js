@@ -1,6 +1,6 @@
 import Game from '../../game';
 import Entity from '../entity';
-import { Bearing } from '../../util';
+import { Bearing } from '../../../util';
 
 class Bullet extends Entity {
     constructor(position, direction) {
