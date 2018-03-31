@@ -2,7 +2,7 @@ class Entity {
     constructor(position, direction, type) {
         this.position = position;
         this.direction = direction;
-        this.type = type;
+        this.type = this.constructor.name;
         this.id = Entity.nextId++;
     }
 

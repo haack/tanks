@@ -66,9 +66,15 @@ class World {
             let entity = this.entities[i];
             entity.update();
 
-            if ((entity.position.x < -100 || entity.position.x > this.width) || (entity.position.y < -100 || entity.position.y > this.height)) {
-                this.entities.splice(i, 1);
-                i--;
+            //TODO: add physics property to entities
+            if (entity.type === "Bullet") {
+                if ((entity.position.x < -100 || entity.position.x > this.width) || (entity.position.y < -100 || entity.position.y > this.height)) {
+                    this.entities.splice(i, 1);
+                    i--;
+                }
+            } else {
+                entity.position.x = Math.clamp(entity.position.x, 0, this.width);
+                entity.position.y = Math.clamp(entity.position.y, 0, this.height);
             }
         }
     }
