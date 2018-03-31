@@ -14,7 +14,6 @@ class World {
 
     initialise() {
         this.entities = [];
-        Spawner.randomWaypoint();
     }
 
     addBot(code) {

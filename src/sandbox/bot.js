@@ -5,6 +5,7 @@ class Bot {
             rotatePower: 0,
             turretRotatePower: 0,
             shootRequest: false,
+            marker: null,
         };
     }
 
@@ -14,6 +15,10 @@ class Bot {
 
     get direction() {
         return this.__state.tank.direction;
+    }
+
+    get world() {
+        return this.__state.world;
     }
 
     drive(power) {
@@ -34,6 +39,20 @@ class Bot {
 
     scan() {
         return this.__state.entities;
+    }
+
+    setMarker(position) {
+        this.__commands.marker = position;
+
+        return {
+            position
+        };
+    }
+
+    clearMarker() {
+        this.__commands.marker = null;
+
+        return null;
     }
 
     __cacheState(update) {

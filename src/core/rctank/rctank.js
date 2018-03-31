@@ -13,6 +13,9 @@ class RCTank extends Tank {
     constructor(position, bearing, code) {
         super(position, bearing, 'rgba(94, 155, 255, 0.8)');
 
+        this.lastCommands = {};
+        this.marker = null;
+
         let initialState = {
             tank: this.getBaseState(),
             world: {
@@ -34,7 +37,31 @@ class RCTank extends Tank {
         }
         updateState.entities = updateState
             .entities.filter(entity => entity.id !== this.id);
+
         worker.postMessage(["update", updateState]);
+    }
+
+    draw(ctx) {
+        ctx.save();
+            super.draw(ctx);
+        ctx.restore();
+
+        // will restore to world perspective
+        // so only do after drawing any rctank stuff
+        // TODO: request world to draw this as a temp entity
+        this.drawMarker(ctx);
+    }
+
+    drawMarker(ctx) {
+        ctx.restore();
+
+        if (this.marker) {
+            ctx.save();
+            this.marker.draw(ctx);
+            ctx.restore();
+        }
+
+        ctx.save();
     }
 
     sandboxResponse(res) {
@@ -48,6 +75,12 @@ class RCTank extends Tank {
         if (tankCommands.shootRequest) {
             this.shoot();
         }
+
+        if (tankCommands.marker) {
+            this.marker = new Waypoint(tankCommands.marker);
+        }
+
+        this.lastCommands = tankCommands;
     }
 }
 
