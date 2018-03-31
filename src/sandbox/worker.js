@@ -1,7 +1,13 @@
 import Bot from './bot';
+import { Point, Bearing, Nav } from '../util';
 
 self.Bot = Bot;
 self.module = {};
+self.lib = {
+    Point,
+    Bearing,
+    Nav,
+};
 
 let botEnv = null;
 

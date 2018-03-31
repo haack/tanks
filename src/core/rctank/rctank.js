@@ -28,7 +28,10 @@ class RCTank extends Tank {
     update() {
         super.update();
 
-        let updateState = Game.world.getState();
+        let updateState = {
+            ...Game.world.getState(),
+            tank: this.getBaseState(),
+        }
         updateState.entities = updateState
             .entities.filter(entity => entity.id !== this.id);
         worker.postMessage(["update", updateState]);

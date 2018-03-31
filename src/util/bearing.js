@@ -32,6 +32,15 @@ class Bearing {
         return this;
     }
 
+    static between(positionA, positionB) {
+        let dx = positionB.x - positionA.x;
+        let dy = positionA.y - positionB.y;
+
+        let theta = Math.atan2(dx, dy);
+
+        return new Bearing(theta);
+    }
+
     clone() {
         return new Bearing(this.getRadians());
     }

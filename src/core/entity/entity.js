@@ -24,7 +24,8 @@ class Entity {
         return {
             position: this.position,
             id: this.id,
-            type: this.constructor.name
+            type: this.constructor.name,
+            direction: this.direction,
         }
     }
 }

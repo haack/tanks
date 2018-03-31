@@ -13,7 +13,7 @@ const defaultBotCode = `class MyBot extends Bot {
 
 module.exports = MyBot;`;
 
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+let editorConfig = {
     theme: 'monokai',
     mode: 'javascript',
     lineNumbers: true,
@@ -21,9 +21,10 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     indentWithTabs: true,
     tabSize: 4,
     indentUnit: 4,
-    lineWrapping: true,
-});
+    lineWrapping: false,
+};
 
+let editor = CodeMirror.fromTextArea(document.getElementById("code"), editorConfig);
 editor.getDoc().setValue(localStorage.getItem('code') || defaultBotCode);
 
 $('#stop-code').click(() => {

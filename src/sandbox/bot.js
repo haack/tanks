@@ -8,6 +8,14 @@ class Bot {
         };
     }
 
+    get position() {
+        return this.__state.tank.position;
+    }
+
+    get direction() {
+        return this.__state.tank.direction;
+    }
+
     drive(power) {
         this.__commands.drivePower = power;
     }

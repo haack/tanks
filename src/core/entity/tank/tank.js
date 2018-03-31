@@ -38,21 +38,6 @@ class Tank extends Entity {
         this.drawTurret(ctx);
     }
 
-    turnTo(target) {
-        // get bearing to target
-        let bearingToTarget = this.position.getBearingBetween(target);
-
-        let theta = bearingToTarget
-            .addRadians(-this.direction.getRadians())
-            .getRadians();
-
-        let thetaDifference = Math.PI - theta;
-        let rotationPower = Math.sign(thetaDifference);
-
-        // turn to bearing
-        this.rotate(rotationPower);
-    }
-
     drive(power) {
         power = Math.clamp(power, -1, 1);
 
