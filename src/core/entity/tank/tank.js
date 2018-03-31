@@ -144,8 +144,8 @@ class Tank extends Entity {
 
 Tank.bodyWidth = 20;
 Tank.bodyLength = 22;
-Tank.rotationSpeed = 60;
-Tank.driveSpeed = 100;
+Tank.rotationSpeed = 100;
+Tank.driveSpeed = 200;
 
 Tank.trackWidth = 7;
 Tank.trackLength = 27;
@@ -157,6 +157,6 @@ Tank.turretRotationSpeed = 90;
 
 Tank.turretBaseWidth = 10;
 
-Tank.timeToReload = 1;
+Tank.timeToReload = 0.5;
 
 export default Tank;

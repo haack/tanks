@@ -30,6 +30,6 @@ class Bullet extends Entity {
     }
 }
 
-Bullet.speed = 250;
+Bullet.speed = 300;
 
 export default Bullet;

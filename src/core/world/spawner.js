@@ -1,5 +1,5 @@
 import Game from '../game';
-import { Bullet, Waypoint } from '../entity/';
+import { Bullet, Waypoint, Enemy } from '../entity/';
 import { Point } from '../../util';
 
 class Spawner {
@@ -18,10 +18,28 @@ class Spawner {
     }
 
     randomWaypoint() {
+        let point = this.randomPosition();
+
+        return this.waypoint(point);
+    }
+
+    randomPosition() {
         let x = Math.floor(Math.random() * Math.floor(Game.world.width - 100)) + 100;
         let y = Math.floor(Math.random() * Math.floor(Game.world.height - 100)) + 100;
 
-        return this.waypoint(new Point(x, y));
+        return new Point(x, y);
+    }
+
+    randomDirection() {
+        return Math.random() * (Math.PI * 2);
+    }
+
+    randomEnemyTank() {
+        let point = this.randomPosition();
+        let direction = this.randomDirection();
+        let tank = new Enemy(point, direction);
+
+        Game.world.addEntity(tank);
     }
 
     removeEntity(entity) {

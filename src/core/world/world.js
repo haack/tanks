@@ -14,6 +14,10 @@ class World {
 
     initialise() {
         this.entities = [];
+
+        for (let i = 0; i < 3; i++) {
+            Spawner.randomEnemyTank();
+        }
     }
 
     addBot(code) {
@@ -80,6 +84,6 @@ class World {
     }
 }
 
-World.scale = 0.8;
+World.scale = 0.5;
 
 export default World;
