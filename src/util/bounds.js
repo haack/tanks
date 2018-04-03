@@ -9,10 +9,14 @@ class Bounds {
     }
 
     scaleBy(factor) {
-        this.minX += (this.width * (factor / 2));
-        this.minY += (this.height * (factor / 2));
-        this.maxX -= (this.width * (factor / 2));
-        this.maxY -= (this.height * (factor / 2));
+        let width = this.width;
+        let height = this.height;
+        let center = this.center;
+
+        this.minX = (this.center.x - ((width / 2) * factor));
+        this.minY = (this.center.y - ((height / 2) * factor));
+        this.maxX = (this.center.x + ((width / 2) * factor));
+        this.maxY = (this.center.y + ((height / 2) * factor));
 
         return this;
     }
@@ -27,6 +31,17 @@ class Bounds {
         this.maxY += dy;
 
         return this;
+    }
+
+    //TODO: add rotation to bounds and SAT intersection check
+    intersects(other) {
+        // xintersect
+        if (this.maxX > other.minX && this.minX < other.maxX) {
+            // yintersect
+            return (this.maxY > other.minY && this.minY < other.maxY);
+        }
+
+        return false;
     }
 
     clone() {

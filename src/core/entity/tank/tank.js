@@ -1,7 +1,7 @@
 import Game from '../../game';
 import Spawner from '../../world/spawner';
 import Entity from '../entity';
-import { Bearing, Point } from '../../../util';
+import { Bearing, Point, Bounds } from '../../../util';
 import { Waypoint } from '../';
 
 class Tank extends Entity {
@@ -50,7 +50,7 @@ class Tank extends Entity {
 
     shoot() {
         if (this.remainingTimeToReload <= 0) {
-            Spawner.bullet(this.position, this.direction.getRadians() + this.turretDirection.getRadians());
+            Spawner.bullet(this.position, this.direction.getRadians() + this.turretDirection.getRadians(), this.id);
             this.remainingTimeToReload += Tank.timeToReload;
         }
     }
@@ -140,6 +140,10 @@ class Tank extends Entity {
             ctx.restore();
         }
     }
+
+    onCollision() {
+        // TODO:
+    }
 }
 
 Tank.bodyWidth = 20;
@@ -158,5 +162,8 @@ Tank.turretRotationSpeed = 90;
 Tank.turretBaseWidth = 10;
 
 Tank.timeToReload = 0.5;
+
+Tank.passable = false;
+Tank.bounds = new Bounds(0, 0, Tank.bodyWidth, Tank.bodyLength);
 
 export default Tank;

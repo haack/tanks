@@ -1,5 +1,5 @@
 class Entity {
-    constructor(position, direction, type) {
+    constructor(position, direction) {
         this.position = position;
         this.direction = direction;
         this.type = this.constructor.name;
@@ -24,12 +24,17 @@ class Entity {
         return {
             position: this.position,
             id: this.id,
-            type: this.constructor.name,
+            type: this.type,
             direction: this.direction,
         }
+    }
+
+    bounds() {
+        return this.constructor.bounds.clone().translateToCenter({x: this.position.x, y: this.position.y});
     }
 }
 
 Entity.nextId = 1;
+Entity.passable = true;
 
 export default Entity;

@@ -11,7 +11,7 @@ let worker = new Worker("/build/sandbox-bundle.js");
 // Remote controlled tank
 class RCTank extends Tank {
     constructor(position, bearing, code) {
-        super(position, bearing, 'rgba(94, 155, 255, 0.8)');
+        super(position, bearing, RCTank.color);
 
         this.lastCommands = {};
         this.marker = null;
@@ -83,5 +83,7 @@ class RCTank extends Tank {
         this.lastCommands = tankCommands;
     }
 }
+
+RCTank.color = 'rgba(94, 155, 255, 0.8)';
 
 export default RCTank;

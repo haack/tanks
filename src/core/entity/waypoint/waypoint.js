@@ -1,5 +1,5 @@
 import Entity from '../entity';
-import { Bearing } from '../../../util';
+import { Bearing, Bounds } from '../../../util';
 
 class Waypoint extends Entity {
     constructor(position) {
@@ -32,5 +32,6 @@ class Waypoint extends Entity {
 }
 
 Waypoint.radius = 5;
+Waypoint.bounds = new Bounds(0, 0, Waypoint.radius, Waypoint.radius)
 
 export default Waypoint;

@@ -5,8 +5,8 @@ import { Point } from '../../util';
 class Spawner {
     constructor() {}
 
-    bullet(position, direction) {
-        let bullet = new Bullet(position.clone(), direction);
+    bullet(position, direction, parentId) {
+        let bullet = new Bullet(position.clone(), direction, parentId);
         Game.world.addEntity(bullet);
         return bullet;
     }

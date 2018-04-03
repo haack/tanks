@@ -71,6 +71,17 @@ class World {
             entity.update();
 
             //TODO: add physics property to entities
+            //TODO: remove n^2 collision lookup
+            for (let j = 0; j < this.entities.length; j++) {
+                if (i === j) continue;
+
+                let other = this.entities[j];
+
+                if (this.checkCollision(entity, other)) {
+                    entity.onCollision(other);
+                    other.onCollision(entity);
+                }
+            }
             if (entity.type === "Bullet") {
                 if ((entity.position.x < -100 || entity.position.x > this.width) || (entity.position.y < -100 || entity.position.y > this.height)) {
                     this.entities.splice(i, 1);
@@ -81,6 +92,10 @@ class World {
                 entity.position.y = Math.clamp(entity.position.y, 0, this.height);
             }
         }
+    }
+
+    checkCollision(entity1, entity2) {
+        return entity1.bounds().scaleBy(World.scale).intersects(entity2.bounds().scaleBy(World.scale));
     }
 }
 
