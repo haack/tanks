@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "~bulma/bulma";
+
+.aside {
+  background-color: #F9F9F9;
+  border-right: 1px solid #DEDEDE;
+}
+
+.fill-height {
+  height: calc(100vh - 40px);
+}
+
+html, body {margin: 0; height: 100%; overflow: hidden}
