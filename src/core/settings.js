@@ -1,5 +1,5 @@
 const settings = {
-    timestep: 30 / 1000,
+  timestep: 30 / 1000
 };
 
 export default settings;

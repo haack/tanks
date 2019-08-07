@@ -5,6 +5,7 @@ This is an educational programming game. You write some code for your remote con
 ![Pew pew pew](https://i.gyazo.com/7a11abe1fd41402aa2ceb3d2f87ef6b4.gif)
 
 ## Getting started
+
 Before you start, [install and run](#installation) the app.
 
 Now the fun begins. We'll first create an empty bot. Copy the following code into the editor on the left:
@@ -78,13 +79,14 @@ Modules are accessible at `lib.ModuleName`
 - As long as you have a Bot class that is exported, with implementations for `create()` and `update()` you can add whatever code you want! This means storing state in your bot, more bot functions, more classes etc. Go wild!
 - Have fun!
 
-## Example 
+## Example
 
 - [Waypoint chaser](https://gist.github.com/haack/4fccd52bb17106d34d89a6600112ce5d). This bot uses all commands and the Nav module.
 
 # Installation
 
 The game isn't currently hosted but you can run it yourself easily:
+
 ```
 yarn
 yarn watch
