@@ -1,6 +1,6 @@
 # tanks
 
-This is an educational programming game. You some code for your remote controlled tank and hit "Run"!
+This is an educational programming game. You write some code for your remote controlled tank and hit "Run"!
 
 ![Pew pew pew](https://i.gyazo.com/7a11abe1fd41402aa2ceb3d2f87ef6b4.gif)
 
