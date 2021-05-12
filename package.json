@@ -16,6 +16,6 @@
     "babel-preset-stage-2": "^6.24.1"
   },
   "dependencies": {
-    "codemirror": "^5.35.0"
+    "codemirror": "^5.58.2"
   }
 }
